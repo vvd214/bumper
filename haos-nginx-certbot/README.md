@@ -2,23 +2,29 @@
 
 This add-on wraps [`jonasal/nginx-certbot`](https://github.com/JonasAlfredsson/docker-nginx-certbot) for Home Assistant OS.
 
-It uses the existing Bumper data folder:
+It uses a configurable data folder. The default is:
 
 ```text
 /share/bumper
 ```
 
+You can change `data_path` in the add-on options, for example:
+
+```text
+/share/nginx_certbot
+```
+
 Expected files:
 
 ```text
-/share/bumper/configs/nginx.conf
-/share/bumper/configs/user_conf.d/app.conf
-/share/bumper/configs/nginx-certbot.env
-/share/bumper/configs/letsencrypt/
+<data_path>/configs/nginx.conf
+<data_path>/configs/user_conf.d/app.conf
+<data_path>/configs/nginx-certbot.env
+<data_path>/configs/letsencrypt/
 ```
 
 Set `certbot_email` in the add-on options or keep `CERTBOT_EMAIL` in:
 
 ```text
-/share/bumper/configs/nginx-certbot.env
+<data_path>/configs/nginx-certbot.env
 ```

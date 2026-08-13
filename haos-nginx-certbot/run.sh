@@ -27,8 +27,9 @@ else:
 PY
 }
 
-BUMPER_SHARE="$(option bumper_path /share/bumper)"
-CONFIG_DIR="${BUMPER_SHARE}/configs"
+LEGACY_DATA_PATH="$(option bumper_path "")"
+DATA_PATH="$(option data_path "${LEGACY_DATA_PATH:-/share/bumper}")"
+CONFIG_DIR="${DATA_PATH}/configs"
 NGINX_CONFIG="${CONFIG_DIR}/nginx.conf"
 USER_CONFIG_DIR="${CONFIG_DIR}/user_conf.d"
 LETSENCRYPT_DIR="${CONFIG_DIR}/letsencrypt"
@@ -86,7 +87,7 @@ SYNC_PID=$!
 
 trap 'sync_letsencrypt; kill "${SYNC_PID}" 2>/dev/null || true' EXIT INT TERM
 
-echo "Using Bumper data path: $BUMPER_SHARE"
+echo "Using data path: $DATA_PATH"
 echo "Using Nginx config: $NGINX_CONFIG"
 echo "Using Certbot email: $CERTBOT_EMAIL"
 

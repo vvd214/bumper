@@ -74,8 +74,9 @@ ghcr.io/vvd214/aarch64-addon-bumper
 
 The repository also includes an `Nginx Certbot` HAOS add-on based on
 [`jonasal/nginx-certbot`](https://github.com/JonasAlfredsson/docker-nginx-certbot).
-It uses the same `/share/bumper` data folder for `configs/nginx.conf`,
-`configs/user_conf.d`, and `configs/letsencrypt`.
+It uses a configurable share data path for `configs/nginx.conf`,
+`configs/user_conf.d`, and `configs/letsencrypt`. The default is `/share/bumper`,
+but it can be changed in the add-on options, for example to `/share/nginx_certbot`.
 
 ### ✨ Docker Swarm Deployment
 

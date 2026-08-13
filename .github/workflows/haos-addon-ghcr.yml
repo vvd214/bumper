@@ -99,8 +99,8 @@ jobs:
           platforms: linux/arm64
           push: true
           tags: |
-            ${{ env.REGISTRY }}/vvd214/aarch64-addon-nginx-certbot:1.0.0
+            ${{ env.REGISTRY }}/vvd214/aarch64-addon-nginx-certbot:1.0.1
             ${{ env.REGISTRY }}/vvd214/aarch64-addon-nginx-certbot:latest
           labels: |
             org.opencontainers.image.source=https://github.com/${{ github.repository }}
-            org.opencontainers.image.version=1.0.0
+            org.opencontainers.image.version=1.0.1

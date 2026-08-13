@@ -1,8 +1,8 @@
 ---
 name: Nginx Certbot
-version: 1.0.0
+version: 1.0.1
 slug: nginx_certbot
-description: Nginx reverse proxy with Certbot using Bumper share data
+description: Nginx reverse proxy with Certbot using a configurable share data path
 url: https://github.com/vvd214/bumper/tree/main/haos-nginx-certbot
 arch:
   - aarch64
@@ -19,12 +19,12 @@ ports_description:
   80/tcp: HTTP and ACME challenge
   443/tcp: HTTPS and TLS stream proxy
 options:
-  bumper_path: /share/bumper
+  data_path: /share/bumper
   certbot_email: ""
   renewal_interval: 5d
   staging: false
 schema:
-  bumper_path: str
+  data_path: str
   certbot_email: str?
   renewal_interval: str
   staging: bool
