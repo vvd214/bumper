@@ -10,6 +10,7 @@ on:
       - "haos-bumper/**"
       - "pyproject.toml"
       - "uv.lock"
+      - ".dockerignore"
       - ".github/workflows/haos-addon-ghcr.yml"
   workflow_dispatch:
 
