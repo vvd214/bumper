@@ -1,0 +1,30 @@
+---
+name: Nginx Certbot
+version: 1.0.0
+slug: nginx_certbot
+description: Nginx reverse proxy with Certbot using Bumper share data
+url: https://github.com/vvd214/bumper/tree/main/haos-nginx-certbot
+arch:
+  - aarch64
+image: ghcr.io/vvd214/{arch}-addon-nginx-certbot
+startup: services
+boot: auto
+init: false
+map:
+  - share:rw
+ports:
+  80/tcp: 80
+  443/tcp: 443
+ports_description:
+  80/tcp: HTTP and ACME challenge
+  443/tcp: HTTPS and TLS stream proxy
+options:
+  bumper_path: /share/bumper
+  certbot_email: ""
+  renewal_interval: 5d
+  staging: false
+schema:
+  bumper_path: str
+  certbot_email: str?
+  renewal_interval: str
+  staging: bool

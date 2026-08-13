@@ -38,6 +38,8 @@
 !bumper/**
 !haos-bumper/
 !haos-bumper/**
+!haos-nginx-certbot/
+!haos-nginx-certbot/**
 
 !certs/
 !data/

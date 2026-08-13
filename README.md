@@ -72,6 +72,11 @@ The add-on image is published by GitHub Actions to:
 ghcr.io/vvd214/aarch64-addon-bumper
 ```
 
+The repository also includes an `Nginx Certbot` HAOS add-on based on
+[`jonasal/nginx-certbot`](https://github.com/JonasAlfredsson/docker-nginx-certbot).
+It uses the same `/share/bumper` data folder for `configs/nginx.conf`,
+`configs/user_conf.d`, and `configs/letsencrypt`.
+
 ### ✨ Docker Swarm Deployment
 
 **Step 1 – Clone the repository**
