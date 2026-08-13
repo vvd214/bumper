@@ -7,6 +7,8 @@
 !bumper/**
 !haos-bumper/
 !haos-bumper/**
+!haos-nginx-certbot/
+!haos-nginx-certbot/**
 !pyproject.toml
 !uv.lock
 
