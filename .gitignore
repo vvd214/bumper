@@ -20,6 +20,7 @@
 !SECURITY.md
 
 !README.md
+!repository.yaml
 
 !.pre-commit-config.yaml
 !.gitleaks.toml
@@ -35,6 +36,8 @@
 
 !bumper/
 !bumper/**
+!haos-bumper/
+!haos-bumper/**
 
 !certs/
 !data/

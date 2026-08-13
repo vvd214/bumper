@@ -1,0 +1,43 @@
+---
+name: Bumper
+version: 0.4.1
+slug: bumper
+description: Local Ecovacs/Deebot server for Home Assistant OS
+url: https://github.com/vvd214/bumper/tree/main/haos-bumper
+arch:
+  - aarch64
+image: ghcr.io/vvd214/{arch}-addon-bumper
+startup: services
+boot: auto
+init: false
+hassio_api: true
+map:
+  - share:rw
+ports:
+  8007/tcp: 8007
+  1883/tcp: 1883
+  8883/tcp: 8883
+  5223/tcp: 5223
+ports_description:
+  8007/tcp: Bumper HTTP server
+  1883/tcp: MQTT server
+  8883/tcp: MQTT TLS server
+  5223/tcp: XMPP TLS server
+webui: http://[HOST]:[PORT:8007]
+watchdog: tcp://[HOST]:8007
+options:
+  data_path: /share/bumper
+  announce_ip: ""
+  listen: 0.0.0.0
+  mqtt_admin_users: admin
+  debug_level: INFO
+  debug_verbose: 1
+  sync_timezone: false
+schema:
+  data_path: str
+  announce_ip: str?
+  listen: str
+  mqtt_admin_users: str?
+  debug_level: list(DEBUG|INFO|WARNING|ERROR|CRITICAL)
+  debug_verbose: int(0,3)
+  sync_timezone: bool

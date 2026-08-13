@@ -52,6 +52,26 @@ BUMPER_MQTT_ADMIN_USERS=admin
 
 Full configuration options are available in the [Wiki](https://MVladislav.github.io/bumper/infos/Env_Var/).
 
+### Home Assistant OS Add-on
+
+This repository can also be added directly to the Home Assistant OS add-on store:
+
+```text
+https://github.com/vvd214/bumper
+```
+
+Before starting the add-on, copy the personal Bumper data folder to:
+
+```text
+/share/bumper
+```
+
+The add-on image is published by GitHub Actions to:
+
+```text
+ghcr.io/vvd214/aarch64-addon-bumper
+```
+
 ### ✨ Docker Swarm Deployment
 
 **Step 1 – Clone the repository**
