@@ -5,6 +5,9 @@
 
 !bumper/
 !bumper/**
+!haos-bumper/
+!haos-bumper/**
 !pyproject.toml
+!uv.lock
 
 !README.md
