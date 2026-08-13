@@ -468,6 +468,24 @@
     }
   },
   {
+    "classid": "8onkgl",
+    "product": {
+      "_id": "6185e29610683da4d6a7a9cd",
+      "materialNo": "110-2102-0300",
+      "smartType": "MQ_AP",
+      "name": "DEEBOT X1 OMNI",
+      "icon": "6225bd1c2af2127804f540e5",
+      "model": "EINSTEIN_INT",
+      "UILogicId": "t10_ww_n_omni",
+      "ota": true,
+      "supportType": {
+        "share": true
+      },
+      "iconUrl": "https://portal-ww.ecouser.net/api/pim/file/get/6225bd1c2af2127804f540e5",
+      "status": "valid"
+    }
+  },
+  {
     "classid": "1zqysa",
     "product": {
       "_id": "5ee85c64fdd6a30008da0af4",
