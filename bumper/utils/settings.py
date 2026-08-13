@@ -90,6 +90,11 @@ class Config:
     TOKEN_JWT_ALG: str = os.environ.get("TOKEN_JWT_ALG") or "ES256"
     BUMPER_PROXY_MQTT: bool = str_to_bool(os.environ.get("BUMPER_PROXY_MQTT")) or False
     BUMPER_PROXY_WEB: bool = str_to_bool(os.environ.get("BUMPER_PROXY_WEB")) or False
+    BUMPER_MQTT_ADMIN_USERS: set[str] = {
+        user.strip()
+        for user in os.environ.get("BUMPER_MQTT_ADMIN_USERS", "").split(",")
+        if user.strip()
+    }
 
     # Proxy
     PROXY_NAMESERVER: list[str] = ["1.1.1.1", "8.8.8.8"]

@@ -45,6 +45,9 @@ NETWORK_MODE=overlay        # by default "bridge"
 
 # Needs to be set when running with Docker; default is auto-detected from socket
 BUMPER_ANNOUNCE_IP=192.168.0.100  # your server's public/local IP
+
+# Optional: comma-separated MQTT users that bypass robot/client state handling
+BUMPER_MQTT_ADMIN_USERS=admin
 ```
 
 Full configuration options are available in the [Wiki](https://MVladislav.github.io/bumper/infos/Env_Var/).

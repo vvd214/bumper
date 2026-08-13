@@ -100,6 +100,7 @@ services:
       BUMPER_LISTEN: ${BUMPER_LISTEN:-0.0.0.0}
       BUMPER_DEBUG_LEVEL: ${BUMPER_DEBUG_LEVEL:-INFO}
       BUMPER_DEBUG_VERBOSE: ${BUMPER_DEBUG_VERBOSE:-1}
+      BUMPER_MQTT_ADMIN_USERS: ${BUMPER_MQTT_ADMIN_USERS:-}
     volumes:
       - /etc/timezone:/etc/timezone:ro
       - /etc/localtime:/etc/localtime:ro

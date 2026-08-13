@@ -187,6 +187,7 @@ class BumperMQTTServerPlugin(BaseAuthPlugin):  # type: ignore[misc]
 
         self._proxy_clients: dict[str, mqtt_proxy.ProxyClient] = {}
         self._users: dict[str, str] = {}
+        self._admin_clients: set[str] = set()
         self._read_password_file()
 
     async def authenticate(self, *, session: Session) -> bool | None:
@@ -205,6 +206,11 @@ class BumperMQTTServerPlugin(BaseAuthPlugin):  # type: ignore[misc]
             # Authenticate the HelperBot
             if client_id == helper_bot.HELPER_BOT_CLIENT_ID:
                 _LOGGER.info(f"Bumper Authentication Success :: Helperbot :: ClientID: {client_id}")
+                return True
+
+            if username in bumper_isc.BUMPER_MQTT_ADMIN_USERS:
+                self._admin_clients.add(client_id)
+                _LOGGER.info(f"Bumper Authentication Success :: Admin User :: {username} (Client: {client_id})")
                 return True
 
             username = username.split("@")[0] if username and "@" in username else username
@@ -304,6 +310,9 @@ class BumperMQTTServerPlugin(BaseAuthPlugin):  # type: ignore[misc]
     async def on_broker_message_received(self, message: IncomingApplicationMessage, client_id: str) -> None:
         """On message received."""
         try:
+            if client_id in self._admin_clients:
+                return
+
             topic = message.topic
             topic_split = topic.split("/")
             data_decoded: str = (
@@ -375,14 +384,19 @@ class BumperMQTTServerPlugin(BaseAuthPlugin):  # type: ignore[misc]
 
     async def on_broker_client_disconnected(self, client_id: str, client_session: Session) -> None:
         """On client disconnect."""
+        self._admin_clients.discard(client_id)
+
         if bumper_isc.BUMPER_PROXY_MQTT and client_id in self._proxy_clients:
             await self._proxy_clients.pop(client_id).disconnect()
         self._set_client_connected(client_id, False, client_session)
 
-    def _set_client_connected(self, client_id: str, connected: bool, _: Session) -> None:
+    def _set_client_connected(self, client_id: str, connected: bool, session: Session) -> None:
         try:
             # Skip the HelperBot
             if client_id == helper_bot.HELPER_BOT_CLIENT_ID:
+                return
+
+            if session.username in bumper_isc.BUMPER_MQTT_ADMIN_USERS:
                 return
 
             if (result := self._client_id_split_helper(client_id)) is None:
