@@ -65,6 +65,66 @@ PY
 BUMPER_SHARE="$(option data_path /share/bumper)"
 mkdir -p "$BUMPER_SHARE/data" "$BUMPER_SHARE/certs"
 
+repair_bumper_db() {
+    db="$BUMPER_SHARE/data/bumper.db"
+
+    python3 - "$db" <<'PY'
+import json
+import os
+import shutil
+import sys
+from datetime import datetime
+
+path = sys.argv[1]
+os.makedirs(os.path.dirname(path), exist_ok=True)
+
+
+def backup_invalid_db():
+    if not os.path.exists(path):
+        return
+
+    stamp = datetime.now().strftime("%Y%m%d-%H%M%S")
+    backup_path = f"{path}.corrupt-autobak.{stamp}"
+    shutil.copy2(path, backup_path)
+    print(f"Backed up invalid Bumper database to {backup_path}")
+
+
+def write_db(data):
+    temp_path = f"{path}.tmp"
+    with open(temp_path, "w", encoding="utf-8") as file:
+        json.dump(data, file, ensure_ascii=False, separators=(",", ":"))
+    os.replace(temp_path, path)
+
+
+if not os.path.exists(path) or os.path.getsize(path) == 0:
+    write_db({})
+    print("Created empty Bumper database.")
+    sys.exit(0)
+
+try:
+    with open(path, encoding="utf-8") as file:
+        text = file.read()
+    json.loads(text)
+    print("Bumper database JSON check passed.")
+    sys.exit(0)
+except Exception as error:
+    first_error = error
+
+try:
+    decoder = json.JSONDecoder()
+    data, end = decoder.raw_decode(text)
+    backup_invalid_db()
+    write_db(data)
+    print(f"Repaired Bumper database by removing trailing invalid data after byte {end}.")
+except Exception:
+    backup_invalid_db()
+    write_db({})
+    print(f"Reset invalid Bumper database: {first_error}")
+PY
+}
+
+repair_bumper_db
+
 export BUMPER_DATA="$BUMPER_SHARE/data"
 export BUMPER_CERTS="$BUMPER_SHARE/certs"
 export BUMPER_LISTEN="$(option listen 0.0.0.0)"

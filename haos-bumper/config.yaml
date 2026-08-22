@@ -1,6 +1,6 @@
 ---
 name: Bumper
-version: 0.4.2
+version: 0.4.3
 slug: bumper
 description: Local Ecovacs/Deebot server for Home Assistant OS
 url: https://github.com/vvd214/bumper/tree/main/haos-bumper
